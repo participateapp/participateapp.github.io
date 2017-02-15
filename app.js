@@ -19642,7 +19642,7 @@
 	var _user$project$Config$apiUrl = 'https://participate-api.herokuapp.com';
 	var _user$project$Config$facebookClientId = '1583083548592686';
 	var _user$project$Config$facebookRedirectPath = 'facebook_redirect';
-	var _user$project$Config$basePath = '/';
+	var _user$project$Config$basePath = '';
 	var _user$project$Config$baseRoot = 'https://participateapp.github.io';
 
 	var _user$project$Api$decodeProposalSupportAttributes = A3(
