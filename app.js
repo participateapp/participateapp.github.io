@@ -42,14 +42,14 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(1);
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -102,15 +102,15 @@
 	// }(document, 'script', 'facebook-jssdk'));
 
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "index.html";
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -124,8 +124,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./style.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./style.css");
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!./style.css", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!./style.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -134,9 +134,9 @@
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
 	// imports
@@ -148,9 +148,9 @@
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -204,15 +204,15 @@
 	};
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "9ea1a8a2da5650bd1abbffd425319044.jpg";
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -227,7 +227,7 @@
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -462,9 +462,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -478,8 +478,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./layout.css", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./layout.css");
+			module.hot.accept("!!../../../node_modules/css-loader/index.js!./layout.css", function() {
+				var newContent = require("!!../../../node_modules/css-loader/index.js!./layout.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -488,9 +488,9 @@
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
 	// imports
@@ -502,9 +502,9 @@
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	
 	(function() {
@@ -19639,11 +19639,11 @@
 			return {id: a, proposal: b, supportCount: c, supportedByMe: d};
 		});
 
-	var _user$project$Config$apiUrl = 'https://participate-api.herokuapp.com';
-	var _user$project$Config$facebookClientId = '1583083548592686';
+	var _user$project$Config$apiUrl = 'http://localhost:4000';
+	var _user$project$Config$facebookClientId = '1583083701926004';
 	var _user$project$Config$facebookRedirectPath = 'facebook_redirect';
 	var _user$project$Config$basePath = '';
-	var _user$project$Config$baseRoot = 'https://participateapp.github.io';
+	var _user$project$Config$baseRoot = 'http://localhost:3000';
 
 	var _user$project$Api$decodeProposalSupportAttributes = A3(
 		_elm_lang$core$Json_Decode$object2,
@@ -20044,7 +20044,7 @@
 														_elm_lang$html$Html$a,
 														_elm_lang$core$Native_List.fromArray(
 															[
-																_elm_lang$html$Html_Attributes$href('https://github.com/oliverbarnes/participate')
+																_elm_lang$html$Html_Attributes$href('https://github.com/participateapp/web-client')
 															]),
 														_elm_lang$core$Native_List.fromArray(
 															[
@@ -20164,7 +20164,7 @@
 												_elm_lang$html$Html$a,
 												_elm_lang$core$Native_List.fromArray(
 													[
-														_elm_lang$html$Html_Attributes$href('https://github.com/oliverbarnes/participate/blob/master/CONTRIBUTING.md')
+														_elm_lang$html$Html_Attributes$href('https://github.com/participateapp/web-client/blob/master/CONTRIBUTING.md')
 													]),
 												_elm_lang$core$Native_List.fromArray(
 													[
@@ -20181,7 +20181,7 @@
 												_elm_lang$html$Html$a,
 												_elm_lang$core$Native_List.fromArray(
 													[
-														_elm_lang$html$Html_Attributes$href('https://github.com/oliverbarnes/participate/wiki/Development-Setup')
+														_elm_lang$html$Html_Attributes$href('https://github.com/participateapp/web-client/wiki/Development-Setup')
 													]),
 												_elm_lang$core$Native_List.fromArray(
 													[
@@ -20493,7 +20493,7 @@
 													_elm_lang$html$Html$a,
 													_elm_lang$core$Native_List.fromArray(
 														[
-															_elm_lang$html$Html_Attributes$href('https://github.com/oliverbarnes/participate/blob/master/CONTRIBUTING.md'),
+															_elm_lang$html$Html_Attributes$href('https://github.com/participateapp/web-client/blob/master/CONTRIBUTING.md'),
 															_elm_lang$html$Html_Attributes$target('_blank')
 														]),
 													_elm_lang$core$Native_List.fromArray(
@@ -22074,5 +22074,5 @@
 
 
 
-/***/ }
+/***/ })
 /******/ ]);
