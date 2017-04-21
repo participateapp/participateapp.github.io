@@ -19639,11 +19639,11 @@
 			return {id: a, proposal: b, supportCount: c, supportedByMe: d};
 		});
 
-	var _user$project$Config$apiUrl = 'http://localhost:4000';
-	var _user$project$Config$facebookClientId = '1583083701926004';
+	var _user$project$Config$apiUrl = 'https://participate-api.herokuapp.com';
+	var _user$project$Config$facebookClientId = '1583083548592686';
 	var _user$project$Config$facebookRedirectPath = 'facebook_redirect';
 	var _user$project$Config$basePath = '';
-	var _user$project$Config$baseRoot = 'http://localhost:3000';
+	var _user$project$Config$baseRoot = 'https://participateapp.github.io';
 
 	var _user$project$Api$decodeProposalSupportAttributes = A3(
 		_elm_lang$core$Json_Decode$object2,
@@ -21216,7 +21216,7 @@
 										]),
 									_elm_lang$core$Native_List.fromArray(
 										[
-											_elm_lang$html$Html$text('Participate! (test-travis-deploy 1)')
+											_elm_lang$html$Html$text('Participate! (test-travis-deploy 2)')
 										]))
 								])),
 							_debois$elm_mdl$Material_Layout$spacer
