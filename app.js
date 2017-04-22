@@ -21216,7 +21216,7 @@
 										]),
 									_elm_lang$core$Native_List.fromArray(
 										[
-											_elm_lang$html$Html$text('Participate! (test-travis-deploy 2)')
+											_elm_lang$html$Html$text('Participate!')
 										]))
 								])),
 							_debois$elm_mdl$Material_Layout$spacer
