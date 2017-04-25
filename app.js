@@ -70,7 +70,11 @@
 	var app = Elm.Main.embed(mountNode, programFlags);
 
 	app.ports.storeAccessToken.subscribe (function (accessToken) {
-	  sessionStorage.setItem ('accessToken', accessToken);
+	  if (accessToken) {
+	    sessionStorage.setItem ('accessToken', accessToken);
+	  } else {
+	    sessionStorage.removeItem ('accessToken');
+	  }
 	});
 
 	// TODO: Figure out how popup that only gets the authorization code
@@ -20573,7 +20577,7 @@
 	var _user$project$Main$storeAccessToken = _elm_lang$core$Native_Platform.outgoingPort(
 		'storeAccessToken',
 		function (v) {
-			return v;
+			return (v.ctor === 'Nothing') ? null : v._0;
 		});
 	var _user$project$Main$Model = function (a) {
 		return function (b) {
@@ -20645,6 +20649,7 @@
 					}(_p0));
 			});
 	}();
+	var _user$project$Main$SignOut = {ctor: 'SignOut'};
 	var _user$project$Main$SupportProposal = F2(
 		function (a, b) {
 			return {ctor: 'SupportProposal', _0: a, _1: b};
@@ -21176,7 +21181,7 @@
 							_debois$elm_mdl$Material_Menu$item,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_debois$elm_mdl$Material_Menu$onSelect(_user$project$Main$NoOp)
+									_debois$elm_mdl$Material_Menu$onSelect(_user$project$Main$SignOut)
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
@@ -21541,7 +21546,8 @@
 								_1: _elm_lang$core$Platform_Cmd$batch(
 									_elm_lang$core$Native_List.fromArray(
 										[
-											_user$project$Main$storeAccessToken(_p36),
+											_user$project$Main$storeAccessToken(
+											_elm_lang$core$Maybe$Just(_p36)),
 											A2(_user$project$Api$getMe, _p36, _user$project$Main$ApiMsg)
 										]))
 							};
@@ -21676,11 +21682,25 @@
 							{snackbar: snackModel}),
 						_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Main$SnackbarMsg, snackCmd)
 					};
-				default:
+				case 'SupportProposal':
 					return {
 						ctor: '_Tuple2',
 						_0: _user$project$Main$progressStart(model),
 						_1: A4(_user$project$Api$supportProposal, _p34._0, _p34._1, model.accessToken, _user$project$Main$ApiMsg)
+					};
+				default:
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{accessToken: ''}),
+						_1: _elm_lang$core$Platform_Cmd$batch(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_user$project$Main$storeAccessToken(_elm_lang$core$Maybe$Nothing),
+									_elm_lang$navigation$Navigation$newUrl(
+									A2(_sporto$hop$Hop$outputFromPath, _user$project$Main$hopConfig, '/'))
+								]))
 					};
 			}
 		});
