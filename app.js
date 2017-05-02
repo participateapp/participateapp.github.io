@@ -22873,6 +22873,15 @@
 			_user$project$Config$apiUrl,
 			A2(_elm_lang$core$Basics_ops['++'], '/proposals/', id));
 	};
+	var _user$project$Api$unsupportProposalEndpoint = function (id) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$Config$apiUrl,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'/proposals/',
+				A2(_elm_lang$core$Basics_ops['++'], id, '/support')));
+	};
 	var _user$project$Api$supportProposalEndpoint = A2(_elm_lang$core$Basics_ops['++'], _user$project$Config$apiUrl, '/supports');
 	var _user$project$Api$newProposalEndpoint = A2(_elm_lang$core$Basics_ops['++'], _user$project$Config$apiUrl, '/proposals');
 	var _user$project$Api$meEndpoint = A2(_elm_lang$core$Basics_ops['++'], _user$project$Config$apiUrl, '/me');
@@ -23021,20 +23030,23 @@
 								_lukewestby$elm_http_builder$HttpBuilder$get(
 									_user$project$Api$getProposalEndpoint(id)))))));
 		});
-	var _user$project$Api$SupportProposalFailed = function (a) {
-		return {ctor: 'SupportProposalFailed', _0: a};
+	var _user$project$Api$ToggleSupportFailed = function (a) {
+		return {ctor: 'ToggleSupportFailed', _0: a};
+	};
+	var _user$project$Api$ProposalUnsupported = function (a) {
+		return {ctor: 'ProposalUnsupported', _0: a};
 	};
 	var _user$project$Api$ProposalSupported = function (a) {
 		return {ctor: 'ProposalSupported', _0: a};
 	};
-	var _user$project$Api$supportProposal = F4(
+	var _user$project$Api$toggleSupport = F4(
 		function (id, newState, accessToken, wrapMsg) {
-			return A2(
+			return newState ? A2(
 				_elm_lang$core$Platform_Cmd$map,
 				wrapMsg,
 				A3(
 					_user$project$Api_Util$attempt,
-					_user$project$Api$SupportProposalFailed,
+					_user$project$Api$ToggleSupportFailed,
 					_user$project$Api$ProposalSupported,
 					_lukewestby$elm_http_builder$HttpBuilder$toTask(
 						A2(
@@ -23046,7 +23058,21 @@
 								A2(
 									_user$project$Api_Util$withJsonApiBody,
 									_user$project$Api$encodeSupportProposal(id),
-									_lukewestby$elm_http_builder$HttpBuilder$post(_user$project$Api$supportProposalEndpoint)))))));
+									_lukewestby$elm_http_builder$HttpBuilder$post(_user$project$Api$supportProposalEndpoint))))))) : A2(
+				_elm_lang$core$Platform_Cmd$map,
+				wrapMsg,
+				A3(
+					_user$project$Api_Util$attempt,
+					_user$project$Api$ToggleSupportFailed,
+					function (_p2) {
+						return _user$project$Api$ProposalUnsupported(id);
+					},
+					_lukewestby$elm_http_builder$HttpBuilder$toTask(
+						A2(
+							_user$project$Api_Util$withAccessToken,
+							accessToken,
+							_lukewestby$elm_http_builder$HttpBuilder$delete(
+								_user$project$Api$unsupportProposalEndpoint(id))))));
 		});
 	var _user$project$Api$ProposalCreationFailed = function (a) {
 		return {ctor: 'ProposalCreationFailed', _0: a};
@@ -23792,6 +23818,22 @@
 			model,
 			{progress: true});
 	};
+	var _user$project$Main$subtractProposalSupport = F2(
+		function (proposalId, model) {
+			var newProposals = A3(
+				_elm_lang$core$Dict$update,
+				proposalId,
+				_elm_lang$core$Maybe$map(
+					function (proposal) {
+						return _elm_lang$core$Native_Utils.update(
+							proposal,
+							{supportCount: proposal.supportCount - 1, supportedByMe: false});
+					}),
+				model.proposals);
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{proposals: newProposals});
+		});
 	var _user$project$Main$updateProposalSupport = F2(
 		function (support, model) {
 			var newProposals = A3(
@@ -25155,10 +25197,20 @@
 										A2(_user$project$Main$updateProposalSupport, _p27._0, model)),
 									_1: _elm_lang$core$Platform_Cmd$none
 								});
-						case 'SupportProposalFailed':
+						case 'ProposalUnsupported':
+							return A2(
+								_user$project$Main$withSnackbarNote,
+								'Proposal support withdrawn',
+								{
+									ctor: '_Tuple2',
+									_0: _user$project$Main$progressDone(
+										A2(_user$project$Main$subtractProposalSupport, _p27._0, model)),
+									_1: _elm_lang$core$Platform_Cmd$none
+								});
+						case 'ToggleSupportFailed':
 							return A3(
 								_user$project$Main$withHttpErrorResponse,
-								'Supporting proposal failed',
+								'(Un-)Supporting proposal failed',
 								_p27._0,
 								{ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none});
 						case 'GotProposal':
@@ -25240,7 +25292,7 @@
 					return {
 						ctor: '_Tuple2',
 						_0: _user$project$Main$progressStart(model),
-						_1: A4(_user$project$Api$supportProposal, _p20._0, _p20._1, model.accessToken, _user$project$Main$ApiMsg)
+						_1: A4(_user$project$Api$toggleSupport, _p20._0, _p20._1, model.accessToken, _user$project$Main$ApiMsg)
 					};
 				default:
 					return {
